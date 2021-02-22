@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  {% for messages in messages%}
+    <div id="success-alert" class="alert alert-success alert-dismissible">
+      <button class="close" type="button" data-dismiss="alert">×</button>
+      {{messages}}
+    </div>
+    {%endfor %}
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+{% endblock %}
+
+
+
+<script>
+  $(document).ready(function() {
+   $(".alert-dismissible").fadeTo(2000, 500).slideUp(500, function(){
+    $(".alert-dismissible").alert('close');
+    });   
+  });
+</script>
